@@ -40,6 +40,12 @@ function deleteContent(item_idx) {
   localStorage.setItem("items", JSON.stringify(items_arr1));
   addToTable();
 }
+function clearlist(){
+    if(confirm("Are you sure?")){
+        localStorage.clear();
+        addToTable();
+    }
+}
 localStorage.clear();
 addtolist = document.getElementById("add-to-list");
 addtolist.addEventListener("click", addContent);
