@@ -1,10 +1,8 @@
-localStorage.clear();
-
-function addToTable() {
+function addContent() {
   let task_val = document.getElementById("task").value;
   let description_val = document.getElementById("description").value;
-  let items_arr = [];
   if (localStorage.getItem("items") == null) {
+    items_arr = [];
     items_arr.push([task_val, description_val]);
     localStorage.setItem("items", JSON.stringify(items_arr));
   } else {
@@ -12,6 +10,16 @@ function addToTable() {
     items_arr = JSON.parse(items_str);
     items_arr.push([task_val, description_val]);
     localStorage.setItem("items", JSON.stringify(items_arr));
+  }
+  addToTable();
+}
+function addToTable() {
+  if (localStorage.getItem("items") == null) {
+    items_arr = [];
+    localStorage.setItem("items", JSON.stringify(items_arr));
+  } else {
+    items_str = localStorage.getItem("items");
+    items_arr = JSON.parse(items_str);
   }
   let table_content = document.getElementById("table-contents");
   let str = "";
@@ -21,11 +29,10 @@ function addToTable() {
       <td>${element[0]}</td>
       <td>${element[1]}</td>
       <td><button class="btn btn-sm btn-primary" onclick="deleteContent(${idx})">Delete</button></td>
-    </tr>`;
+      </tr>`;
   });
   table_content.innerHTML = str;
 }
-
 function deleteContent(item_idx) {
   let items_str1 = localStorage.getItem("items");
   let items_arr1 = JSON.parse(items_str1);
@@ -33,5 +40,6 @@ function deleteContent(item_idx) {
   localStorage.setItem("items", JSON.stringify(items_arr1));
   addToTable();
 }
+localStorage.clear();
 addtolist = document.getElementById("add-to-list");
-addtolist.addEventListener("click", addToTable);
+addtolist.addEventListener("click", addContent);
