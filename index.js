@@ -46,6 +46,9 @@ function clearlist() {
     addToTable();
   }
 }
+function confirm_submit(){
+    confirm("Do you want to submit");
+}
 localStorage.clear();
 addtolist = document.getElementById("add-to-list");
 addtolist.addEventListener("click", addContent);
